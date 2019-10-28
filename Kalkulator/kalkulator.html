@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>Kalkulator</title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta charset="utf-8">
+  
+  <!--enable bootstrap responsive-->
+  <meta name="viewport" content="width-device-width, initial-scale=1.0">
+
+  <!--bootstrap-->
+  <script type="text/javascript" src="bootstrap-3.3.4-dist/jquery/jquery-1.11.1.min.js" type="text/javascript"></script>
+  
+  <!--bootstrap-->
+  <link rel="stylesheet" href="bootstrap-3.3.4-dist/css/bootstrap.min.css">
+  <script src ="bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
+  
+  <!--form validation-->
+  <link rel="stylesheet" href="formvalidation/css/formValidation.min.css" media="screen">
+  <script src="formvalidation/js/formValidation.min.js"></script>
+  <script src="formvalidation/js/framework/bootstrap.min.js"></script>
+  
+</head>
+
+<body background="01_bg.png"> 
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7 col-md-offset-3">
+				<div class="login-panel panel panel-default">
+					<div class="panel-heading text-center">
+						<h2 class="panel-default">Kalkulator Gerak Parabola</h2>
+					</div>
+					<div class="list-group-item active" style="border-radius: 5px"><center><h4>Variabel</h4></center></div>
+					<form id="basicBootstrapForm" class="form-horizontal" name=data>
+						<div class="panel-body">
+							<div class="form-group">
+								<div class="col-xs-6">
+									<center><label>Kecepatan Awal(m/s)</label></center>
+									<input type="text" class="form-control" name=V value=100 onKeyup="hitung_ymax_xmax_t()" />
+								</div>
+								<div class="col-xs-6">
+									<center><label>Sudut (Derajat)</label><center>
+									<input type="text" class="form-control" value=45 NAME=THETA onKeyup="hitung_ymax_xmax_t()"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-2"></div>
+								<div class="col-xs-8">
+									<center><label>Waktu untuk melakukan satu parabola penuh (s)</label></center>
+									<input type="text" class="form-control" VALUE=100 NAME=T onKeyup="document.data.T.value=t"/>
+									<div class="col-xs-2"></div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-6">
+									<center><label>Ketinggian Maksimum(m)</label></center>
+									<input type="text" class="form-control" VALUE=100 NAME=YMAX onKeyup="hitung_V0_Theta_Waktu()"/>
+								</div>
+								<div class="col-xs-6">
+									<center><label>Jarak Maksimum(m)</label></center>
+									<input type="text" class="form-control" VALUE=100 NAME=R onKeyup="hitung_V0_Theta_Waktu()" />
+								</div>
+							</div>
+							<p align="justify"><h4><strong>*Petunjuk Penggunaan</strong></h4>Untuk Menghitung waktu,jarak maksimum,dan ketinggian maksimum, silahkan isi kecepatan awal dan sudut,sebaliknya untuk mendapatkan nilai kecepatan awal dan sudut elevasi silahkan isi waktu,jarak maksimum,dan ketinggian maksimum.<br><strong>Catatan :</strong> Anda bisa mengisi salah satu ,dua,atau tiga field saja,akan tetapi tidak boleh ada field yang kosong.</p>
+							<center><a href="file:///C:/Users/HikenNoAce/Desktop/pafinal/FinalXXX/simulation_menu.html"><button class="btn btn-primary" type="button">Kembali ke Menu Utama</button></a></center>
+						</div>
+					<div class="list-group-item active" style="border-radius: 5px"><center><p>Based on: www.jsmadeeasy.com</p></center></div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+var v=100;
+var theta=45;
+var g=10;
+var t;
+var range;
+var ymax;
+
+
+function DerajatKeRadian(which){
+	if(which=="toRad"){
+		var thetaRad=theta*(Math.PI/180);
+		return thetaRad;
+		}
+	if(which=="toDeg"){
+		var thetaDeg=theta*(180/Math.PI);
+		return thetaDeg;
+		}
+	}
+
+function hitung_ymax_xmax_t(){
+
+	function getData(){
+		return document.data.V.value;
+		return document.data.THETA.value;
+		}
+
+	v=document.data.V.value;
+	theta=document.data.THETA.value;
+
+	theta=DerajatKeRadian("toRad");
+
+	var vx = v*Math.cos(theta);
+	var vy = v*Math.sin(theta);
+
+	t = 2*vy/g;
+
+	range = vx*t;
+
+	ymax = (vy*vy)/(2*g);
+
+	document.data.T.value = Math.round(100*t)/100;
+	document.data.R.value = Math.round(100*range)/100;
+	document.data.YMAX.value = Math.round(100*ymax)/100;
+
+	}
+
+function hitung_V0_Theta_Waktu(){
+
+	function getData(){
+		return document.data.R.value;
+		return document.data.YMAX.value;
+		}
+
+	range=document.data.R.value;
+	ymax=document.data.YMAX.value;
+
+	theta=Math.atan(4*ymax/range);
+
+	v=Math.sqrt(2*g*ymax)/Math.sin(theta);
+
+	t=(2*v*Math.sin(theta))/g;
+
+	theta=DerajatKeRadian("toDeg");
+	var a=(100*t)/100;
+	document.data.T.value=a.toFixed(2);
+	document.data.THETA.value=Math.round(100*theta)/100;
+	document.data.V.value=Math.round(100*v)/100;
+	}
+
+
+	</script>
+</body>
+</html>

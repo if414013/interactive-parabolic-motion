@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Animation</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="assets/css/bootstrap.css" rel="stylesheet">
+
+	<!-- Style CSS -->
+	<link href="style.css" rel="stylesheet">
+	<link href="css/colors.css" rel="stylesheet">
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="assets/js/html5shiv.js"></script>
+	  <script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+
+	<!-- Favicons -->
+	<link rel="shortcut icon" href="assets/ico/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="assets/ico/apple-touch-icon.png" />
+	<link rel="apple-touch-icon" sizes="57x57" href="assets/ico/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="assets/ico/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="assets/ico/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="assets/ico/apple-touch-icon-144x144.png">
+
+</head>
+<body id="boxed">
+	<div id="wrapper" class="container">
+	<div class="topbar">
+    	<div class="container">
+           <a href="simulation_menu.html"><p class="section-title text-center">Klik Untuk Kembali ke Menu Utama</p></a>
+        </div><!-- end container -->
+    </div><!-- end topbar -->
+	<section id="quiz">
+		<div class="section-title text-center">
+			<img src="canvas1.jpg"  style="position:absolute;" width="910px" height="600px">
+            <canvas id="hikennoace" width="910" height="400"  style="position:relative;"></canvas> 
+			<nav> 
+				<input type="button" id="start" value="StartPath" onclick="lintasan_animasi(); hitung();" class="btn btn-primary small" onclick="hitung();"/>
+				<input type="button" id="start" value="Start" onclick="mulai_animasi(); hitung();" class="btn btn-primary small" onclick="hitung()"/>
+				<label for="sudut" style="color: #0c16da;"><strong>Theta</strong></label> 
+				<input name="sudut" type="number" id="teta" value="45" onblur="if(!Number(this.value)){alert('Inputan Bukan Angka!!');}" /> 
+				<label for="kecepatan" style="color: #0c16da;"><strong>V0</strong></label> 
+				<input type="number" name="kecepatan" id="v0" value="80" onblur="if(!Number(this.value)){alert('Inputan Bukan Angka!!');}"  /> 
+				<input type=button value="Refresh" onClick="history.go()" class="btn btn-primary small"/>
+				<label style="color: #0c16da;" for="motionspeed"><strong>Motion Speed</strong></label> 
+				<input type="range" id="motionspeed" min="5" max="155" step="5" />
+			</nav> 
+				<br><p align="center" style="font-size:15px ; color: #c40303;">
+				<b>V<sub><i>0x</i></sub> = <span id="a1">0</span> m/s</b>&emsp;
+				<b>V<sub><i>0y</i></sub> = <span id="b2">0</span> m/s</b>&emsp;
+				<b>t<sub><i>x_max</i></sub> = <span id="c3">0</span> m</b>&emsp;
+				<b>t<sub><i>h_max</i></sub> = <span id="d4">0</span> m</b>&emsp;
+				<b>H<sub><i>max</i></sub> = <span id="e5">0</span> m</b>&emsp;
+				<b>X<sub><i>max</i></sub> = <span id="f6">0</span> m</b></p>
+		</div><!-- end container -->
+	<section class="section-copyright dm-shadow text-center">
+		<div class="container">
+			<p>Copyright © 2015 <a href="aboutus.html">FYP-02 Institut Teknologi Del</a></p>
+		</div><!-- end container -->
+    </section><!-- end section-copyright -->
+	</section>
+	
+	<script> 
+	function clear(){ 
+		var canvas = document.getElementById('hikennoace');
+		var ctx = canvas.getContext('2d');
+		ctx.clearRect(0, 0, 910,400 );
+	}
+	</script>
+      
+</div><!-- wrapper -->
+   <!-- Bootstrap core JavaScript
+    ================================================== -->
+  
+	<script src="js2/Animasi_JS.js"></script>
+    
+</body>
+</html>
